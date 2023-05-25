@@ -19,6 +19,8 @@ class Add: public CalculatorInterface{
         int num1, num2;
     public:
         Add(int x, int y): CalculatorInterface(x, y){}
+
+        // Overriding the pure virtual function
         float calculate(){
             return a + b;
         }
@@ -29,17 +31,28 @@ class Sub: public CalculatorInterface{
         int num1, num2;
     public:
         Sub(int x, int y): CalculatorInterface(x, y){}
+
+        // Overriding the pure virtual function
         float calculate(){
             return a - b;
         }
 };
 
 int main(){
-    Add obj1(20, 10);
-    cout << "Obj 1 result from Adding: " << obj1.calculate() << endl;
+    Add addition(20, 10);
+    Sub subtraction(20, 10);
 
-    Sub obj2(20, 10);
-    cout << "Obj 2 result form Sub: " << obj2.calculate() << endl;
+
+    // Creating a pointer to the base class
+    CalculatorInterface* operation;
+
+    // Assigning the pointer to an object of the Add class
+    operation = &addition;
+    cout << "Obj 1 result from Adding: " << operation->calculate() << endl;
+
+    // Assigning the pointer to an object of the Sub class
+    operation = &subtraction;
+    cout << "Obj 2 result form Sub: " << operation->calculate() << endl;
 
     return 0;
 }
