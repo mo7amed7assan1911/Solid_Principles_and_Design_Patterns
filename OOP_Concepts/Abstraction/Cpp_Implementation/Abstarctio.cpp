@@ -39,20 +39,31 @@ class Sub: public CalculatorInterface{
 };
 
 int main(){
-    Add addition(20, 10);
-    Sub subtraction(20, 10);
+    cout << "Enter two numbers: " << endl;
+    int a, b;
+    cin >> a >> b;
+
+    cout << "Enter your operation [+, -]: " << endl << endl;
+    char op;
+    cin >> op;
+
+    Add addition(a, b);
+    Sub subtraction(a, b);
 
 
     // Creating a pointer to the base class
     CalculatorInterface* operation;
 
+    if(op == '+'){
+        operation = &addition;}
+    else if(op == '-'){
+        operation = &subtraction;}
+    else{
+        cout << "Invalid operation" << endl;
+        return 0;
+    }
+    
     // Assigning the pointer to an object of the Add class
-    operation = &addition;
-    cout << "Obj 1 result from Adding: " << operation->calculate() << endl;
-
-    // Assigning the pointer to an object of the Sub class
-    operation = &subtraction;
-    cout << "Obj 2 result form Sub: " << operation->calculate() << endl;
-
+    cout << "The equation: " << a << " " << op << " " << b << " = " << operation->calculate() << endl;
     return 0;
 }
